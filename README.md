@@ -1,3 +1,20 @@
+# What I have learned from this project.
+
+- Setting up Tailwind for to use DaisyUi frame work(a similar framework bootstrap)
+- What is react-icons, react-router-dom, links and how to implement it.
+- Using Github REST API https://api.github.com/users/bradtraversy
+- Using search funtionality https://api.github.com/search/users?q=brad
+- There is X-Rate-Limit on the api request, it is a number of request you can make it as per the given time interval.
+- So to increase the limit we have to do
+  -> goto github -> settings -> developer setting -> personal access token -> generate new token -> choose expirating date and make those thing which are require to project. -> generte and copy the token
+
+  to check that your token is working go to the postman -> authorization ->select baerer token -> paste the token -> now use the api and check the X-rate-limit
+
+  to implement this on project create .env file and create some variable and store them into it after that where you want to use then use
+  process.env.variableName
+
+-
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
