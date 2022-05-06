@@ -1,10 +1,10 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 import githubReducer from "./GithubReducer";
 
 const GithubContext = createContext();
 
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
-const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
+// const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 export const GithubProvider = ({ children }) => {
   const initialState = {
@@ -19,13 +19,15 @@ export const GithubProvider = ({ children }) => {
     const params = new URLSearchParams({
       q: text,
     });
-    console.log(params);
 
-    const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
-      headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-      },
-    });
+    const response = await fetch(
+      `${GITHUB_URL}/search/users?${params}`
+      // , {
+      //   headers: {
+      //     Authorization: `token ${GITHUB_TOKEN}`,
+      //   },
+      // }
+    );
 
     //? since data have lots of thing and we need search results which inside items
     const { items } = await response.json();
@@ -35,6 +37,10 @@ export const GithubProvider = ({ children }) => {
       payload: items,
     });
   };
+
+  function clearUsers() {
+    dispatch({ type: "CLEAR_USERS" });
+  }
 
   function setLoading() {
     dispatch({ type: "SET_LOADING" });
@@ -46,6 +52,7 @@ export const GithubProvider = ({ children }) => {
         users: state.users,
         loading: state.loading,
         searchUsers,
+        clearUsers,
       }}
     >
       {children}
